@@ -8,76 +8,95 @@ import flixel.tweens.FlxEase;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 
-class FlxHitbox extends FlxSpriteGroup
+class Hitbox extends FlxSpriteGroup
 {
-	public var hitbox:FlxSpriteGroup;
-	public var buttonLeft:FlxButton;
-	public var buttonDown:FlxButton;
-	public var buttonUp:FlxButton;
-	public var buttonRight:FlxButton;
-
+	var hitboxframes:FlxAtlasFrames;
 	var hitbox_hint:FlxSprite;
+        public var hitbox:FlxSpriteGroup;
+	
+	var sizex:Float = 142;
+
+	public var k1:FlxButton;
+	public var k2:FlxButton;
+	public var k3:FlxButton;
+	public var k4:FlxButton;
+	public var k5:FlxButton;
+	public var k6:FlxButton;
+	public var k7:FlxButton;
+	public var k8:FlxButton;
+	public var k9:FlxButton;
 	
 	public function new()
 	{
 		super();
-
-		buttonLeft = new FlxButton(0, 0);
-		buttonDown = new FlxButton(0, 0);
-		buttonUp = new FlxButton(0, 0);
-		buttonRight = new FlxButton(0, 0);
+		
+        k1 = new FlxButton(0, 0);
+        k2 = new FlxButton(0, 0);
+        k3 = new FlxButton(0, 0);
+        k4 = new FlxButton(0, 0);
+        k5 = new FlxButton(0, 0);
+        k6 = new FlxButton(0, 0);
+        k7 = new FlxButton(0, 0);
+        k8 = new FlxButton(0, 0);
+        k9 = new FlxButton(0, 0);
 
 		hitbox = new FlxSpriteGroup();
-		hitbox.add(add(buttonLeft = createhitbox(0, "left")));
-		hitbox.add(add(buttonDown = createhitbox(320, "down")));
-		hitbox.add(add(buttonUp = createhitbox(640, "up")));
-		hitbox.add(add(buttonRight = createhitbox(960, "right")));
+		hitboxframes = Paths.getSparrowAtlas('androidcontrols/hitbox');
+        hitbox.add(add(k1 = createhitbox(0, "k1")));
+        hitbox.add(add(k2 = createhitbox(sizex, "k2")));
+        hitbox.add(add(k3 = createhitbox(sizex * 2, "k3")));
+        hitbox.add(add(k4 = createhitbox(sizex * 3, "k4")));    
+        hitbox.add(add(k5 = createhitbox(sizex * 4, "k5")));
+        hitbox.add(add(k6 = createhitbox(sizex * 5, "k6"))); 
+        hitbox.add(add(k7 = createhitbox(sizex * 6, "k7")));
+        hitbox.add(add(k8 = createhitbox(sizex * 7, "k8"))); 
+        hitbox.add(add(k9 = createhitbox(sizex * 8, "k9")));
 
-		hitbox_hint = new FlxSprite(0, 0).loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
+		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
 		hitbox_hint.alpha = 0.75;
 		add(hitbox_hint);
 	}
 
-	public function createhitbox(hitboxposeX:Float, frames:String) {
-		var hitboxframes = getHitboxFrames().getByName(frames);
-		var graphic:FlxGraphic = FlxGraphic.fromFrame(hitboxframes);
-		var button = new FlxButton(hitboxposeX, 0);
-		button.loadGraphic(graphic);
-		button.alpha = 0;
+	public function createhitbox(buttonPozitionX:Float, framestring:String) {
+        var graphic:FlxGraphic = FlxGraphic.fromFrame(hitboxframes.getByName(framestring));
 
-		button.onDown.callback = function (){
-			FlxTween.num(0, 0.75, 0.075, {ease:FlxEase.circInOut}, function(alpha:Float){ 
-				button.alpha = alpha;
-			});
-		};
+		var button = new FlxButton(buttonPozitionX, 0);
+        button.loadGraphic(graphic);
+        button.alpha = 0;
+    
+        button.onDown.callback = function (){
+            FlxTween.num(0, 0.75, 0.075, {ease:FlxEase.circInOut}, function(alpha:Float){ 
+            	button.alpha = alpha;
+            });
+        };
 
-		button.onUp.callback = function (){
-			FlxTween.num(0.75, 0, 0.1, {ease:FlxEase.circInOut}, function(alpha:Float){ 
-				button.alpha = alpha;
-			});
-		}
+        button.onUp.callback = function (){
+            FlxTween.num(0.75, 0, 0.1, {ease:FlxEase.circInOut}, function(alpha:Float){ 
+            	button.alpha = alpha;
+            });
+        }
+        
+        button.onOut.callback = function (){
+            FlxTween.num(button.alpha, 0, 0.2, {ease:FlxEase.circInOut}, function(alpha:Float){ 
+            	button.alpha = alpha;
+            });
+        }
 
-		button.onOut.callback = function (){
-			FlxTween.num(button.alpha, 0, 0.2, {ease:FlxEase.circInOut}, function(alpha:Float){ 
-				button.alpha = alpha;
-			});
-		}
-
-		return button;
-	}
-
-	public static function getHitboxFrames():FlxAtlasFrames
-	{
-		return Paths.getSparrowAtlas('androidcontrols/hitbox');
+        return button;
 	}
 
 	override public function destroy():Void
 	{
 		super.destroy();
 
-		buttonLeft = null;
-		buttonDown = null;
-		buttonUp = null;
-		buttonRight = null;
+        k1 = null;
+        k2 = null;
+        k3 = null;
+        k4 = null;
+        k5 = null;
+        k6 = null;
+        k7 = null;
+        k8 = null;
+        k9 = null;
 	}
 }

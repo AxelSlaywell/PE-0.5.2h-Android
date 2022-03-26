@@ -537,33 +537,3 @@ class FreeplayState extends MusicBeatState
 		diffText.x -= diffText.width / 2;
 	}
 }
-
-class SongMetadata
-{
-	public var songName:String = "";
-	public var week:Int = 0;
-	public var songCharacter:String = "";
-	public var color:Int = -7179779;
-	public var folder:String = "";
-
-	public function new(song:String, week:Int, songCharacter:String, color:Int)
-	{
-		this.songName = song;
-		this.week = week;
-		this.songCharacter = songCharacter;
-		this.color = color;
-		if(this.folder == null) this.folder = '';
-var tex = Paths.getSparrowAtlas('Freeplay_Discs');
-		disc.frames = tex;
-		disc.animation.addByPrefix("disc", "disc", 24);	
-                add(disc);
-		add(discIcon);
-		discIcon.antialiasing = disc.antialiasing = true;
-                disc.scale.x = 0;
-                discIcon.x = disc.x + disc.width/2 - discIcon.width/2;
-		discIcon.y = disc.y + disc.height/2 - discIcon.height/2;
-		discIcon.angle = disc.angle += 0.6;
-		discIcon.scale.set(disc.scale.x, disc.scale.y);
-                discIcon.animation.play(songs[curSelected].songCharacter)	
-	}
-}

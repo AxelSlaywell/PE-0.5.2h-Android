@@ -1,0 +1,6 @@
+<TextureAtlas imagePath="Freeplay_Discs.png">
+	<!-- Created with Adobe Animate version 21.0.0.35450 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="disc0000" x="0" y="620" width="309" height="310" pivotX="466.95" pivotY="81.1"/>
+	<SubTexture name="disc0001" x="309" y="620" width="309" height="310"/>
+</TextureAtlas>

@@ -552,7 +552,18 @@ class SongMetadata
 		this.week = week;
 		this.songCharacter = songCharacter;
 		this.color = color;
-		this.folder = Paths.currentModDirectory;
 		if(this.folder == null) this.folder = '';
+var tex = Paths.getSparrowAtlas('Freeplay_Discs');
+		disc.frames = tex;
+		disc.animation.addByPrefix("disc", "disc", 24);	
+                add(disc);
+		add(discIcon);
+		discIcon.antialiasing = disc.antialiasing = true;
+                disc.scale.x = 0;
+                discIcon.x = disc.x + disc.width/2 - discIcon.width/2;
+		discIcon.y = disc.y + disc.height/2 - discIcon.height/2;
+		discIcon.angle = disc.angle += 0.6;
+		discIcon.scale.set(disc.scale.x, disc.scale.y);
+                discIcon.animation.play(songs[curSelected].songCharacter)	
 	}
 }
